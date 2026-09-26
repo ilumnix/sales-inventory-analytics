@@ -1,6 +1,7 @@
 from faker import Faker #Imports faker class from the library
 import random
 
+import csv
 fake = Faker() # creates the faker generator that will reuse for every fake value
 
 from datetime import timedelta
@@ -162,31 +163,26 @@ def generate_supplies(suppliers, n:int, products):
         supplies.append(supply)
     return supplies
     
-
+def save_to_csv(data, filename):
+    with open(filename, "w", newline="", encoding="utf-8")as f:
+        writer = csv.DictWriter(f, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
 
 if __name__ == "__main__":
-    customers = generate_customers(5)
-    for c in customers:
-        print(c)
-    
-    products = generate_products(5)
-    for p in products:
-        print(p)
-    
-    orders = generate_orders(customers, 3)
-    for o in orders:
-        print(o)
-        
+
+    customers = generate_customers(60)
+    products = generate_products(40)
+    orders = generate_orders(customers, 180)
     order_items = generate_order_items(orders, products)
-    for oi in order_items:
-        print(oi)
-    print(f"Total order_items: {len(order_items)}")
+    suppliers = generate_suppliers(6)
+    supplies = generate_supplies(suppliers, 100, products)
+
+    save_to_csv(customers, "data/customers.csv")
+    save_to_csv(products, "data/products.csv")
+    save_to_csv(orders, "data/orders.csv")
+    save_to_csv(order_items, "data/order_items.csv")
+    save_to_csv(suppliers, "data/suppliers.csv")
+    save_to_csv(supplies, "data/supplies.csv")
     
-    suppliers = generate_suppliers(3)
-    for s in suppliers:
-            print(s)
-    
-        
-    supplies = generate_supplies(suppliers, 3 , products)
-    for supply in supplies:
-            print(supply)
+    print("All data generated and saved to data/ folder.")
