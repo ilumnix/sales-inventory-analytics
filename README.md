@@ -30,6 +30,18 @@ Version 1.0.0
 __________________________________________________________________________________________________
 
 
+DASHBOARD PREVIEW
+
+![KPI Summary](documentation/KPI.jpg)
+![Most Profitable Products](documentation/profitable.jpg)
+![Low Stock Alert](documentation/lowstock.jpg)
+![Cheapest Supplier per Product](documentation/cheapsuppliers.jpg)
+
+
+
+__________________________________________________________________________________________________
+
+
 
 SETTING UP THE APP
 
